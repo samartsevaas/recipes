@@ -5,7 +5,7 @@ module.exports = {
   css: {
     loaderOptions: {
       scss: {
-        additionalData: `@import "~@/assets/styles/abstracts/index.scss";`,
+        prependData: `@import "~@/assets/styles/abstracts/index.scss";`,
       },
     },
   },
