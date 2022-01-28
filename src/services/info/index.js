@@ -1,11 +1,15 @@
-import { getDatabase, ref } from "firebase/database";
+import { getDatabase, get, ref } from "firebase/database";
 
 export class data {
-    constructor() {
-        this.db = getDatabase();
+  constructor() {
+    this.db = ref(getDatabase());
+  }
+  async getRecipes() {
+    try {
+      const recipes = await get(this.db);
+      return recipes.val();
+    } catch (e) {
+      console.log(e);
     }
-    async getUserName(uid){
-        // eslint-disable-next-line no-unused-vars
-        const userName = ref(this.db, `user/${uid}/info`);
-    }
+  }
 }

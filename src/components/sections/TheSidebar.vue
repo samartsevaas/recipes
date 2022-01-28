@@ -6,23 +6,26 @@
     </div>
     <ul class="sidebar__links">
       <li class="sidebar__links-point">
-        <router-link to="/"
-        ><font-awesome-icon :icon="['fas', 'apple-alt']" />Главная</router-link
+        <router-link to="/main/recipes"
+          ><font-awesome-icon
+            :icon="['fas', 'apple-alt']"
+          />Главная</router-link
         >
       </li>
       <li class="sidebar__links-point">
-        <router-link to="/"
-        ><font-awesome-icon :icon="['fas', 'carrot']" />Категории</router-link
+        <router-link to="/main/categories"
+          ><font-awesome-icon :icon="['fas', 'carrot']" />Категории</router-link
         >
       </li>
       <li class="sidebar__links-point">
-        <router-link to="/"
-        ><font-awesome-icon :icon="['fas', 'lemon']" />Любимые рецепты</router-link
+        <router-link to="/main/favorites"
+          ><font-awesome-icon :icon="['fas', 'lemon']" />Любимые
+          рецепты</router-link
         >
       </li>
       <li class="sidebar__links-point">
-        <router-link to="/"
-        ><font-awesome-icon :icon="['fas', 'seedling']" />Корзина</router-link
+        <router-link to="/main/basket"
+          ><font-awesome-icon :icon="['fas', 'seedling']" />Корзина</router-link
         >
       </li>
     </ul>
@@ -30,8 +33,10 @@
 </template>
 
 <script>
+
 export default {
   name: "TheSidebar",
+
 };
 </script>
 
@@ -46,7 +51,7 @@ export default {
   overflow: auto;
   z-index: 2;
   box-shadow: 0 1px 75px #5a61691f, 0 2px 4px #5a61691f, 0 7.5px 11px #5a61691f,
-  0 3.5px 17.5px #a5b6c91a;
+    0 3.5px 17.5px #a5b6c91a;
 }
 .sidebar__logo {
   display: flex;

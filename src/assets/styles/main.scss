@@ -23,13 +23,17 @@
   src: local('QuestrialRegular'), url("~@/assets/fonts/Questrial-Regular.woff2") format('woff2');
   font-weight: 400;
 }
-
+@font-face {
+  font-family: 'Play';
+  src: local('PlayRegular'), url("~@/assets/fonts/Play-Regular.woff2") format('woff2');
+  font-weight: 400;
+}
 
 *{
-  font-family: Helvetica;
+  font-family: Play, sans-serif;
   font-weight: 400;
   font-size: 16px;
-  color: black;
+  color: $base-font_color;
   box-sizing: border-box;
 }
 body,html{
@@ -46,19 +50,44 @@ ul{
 }
 a{
   text-decoration: none;
+  cursor: pointer;
 }
 .wrapper{
   padding: 0 27px;
 }
 
 .main-content {
+  padding: 27px;
   &__title{
     font-size: 29px;
     padding: 27px 0;
+    display: flex;
+    justify-content: center;
   }
   &__wrapper {
     box-shadow: 0 1px #a5b6c91a, 0 2px 4px #a5b6c91a, 0 5px 5px #a5b6c91a, 0 3.5px 35px #a5b6c91a;
     border-radius: 9px;
     background: white;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.card__like-button{
+  position: absolute;
+  border: none;
+  background: transparent;
+  right: 0;
+  margin-top: 4px;
+  cursor: pointer;
+  & path {
+    color: $heart_non-hover;
+    &:hover{
+      color: $button-change;
+    }
+  }
+  &-fav{
+    & path{
+      color: $notification;
+    }
   }
 }

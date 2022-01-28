@@ -3,8 +3,8 @@
     <the-sidebar></the-sidebar>
     <div class="content">
       <the-header></the-header>
-      <div class="main">
-        <router-view></router-view>
+      <div class="main main-content">
+        <router-view> </router-view>
       </div>
       <the-footer></the-footer>
     </div>

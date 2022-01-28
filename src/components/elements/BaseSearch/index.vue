@@ -1,6 +1,5 @@
 <template>
   <label class="base-search">
-    <font-awesome-icon :icon="['fas', 'search']" />
     <input class="base-search__input" :placeholder="placeholder" />
   </label>
 </template>
@@ -26,6 +25,7 @@ export default {
   }
   &__input {
     border: none;
+    color: $base-font_color;
     &:focus {
       outline: none !important;
       border: none;

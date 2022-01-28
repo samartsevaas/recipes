@@ -1,13 +1,11 @@
 <template>
-$END$
+  <div>это корзина</div>
 </template>
 
 <script>
 export default {
-name: "index"
-}
+  name: "Basket",
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped lang="scss"></style>
