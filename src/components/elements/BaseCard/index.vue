@@ -1,14 +1,16 @@
 <template>
-  <a :href="`/main/categories/${categoryId}`" class="card">
+  <router-link
+    :to="{ name: 'categoryId', params: { id: categoryId } }"
+    class="card"
+  >
     <div class="card__wrapper">
       <slot name="btn"></slot>
       <slot name="image"></slot>
     </div>
     <div>
       <h3><slot name="category"></slot></h3>
-      <h4><slot name="count"></slot></h4>
     </div>
-  </a>
+  </router-link>
 </template>
 
 <script>
@@ -23,11 +25,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-img {
-  width: 130px;
-  height: 130px;
-}
+<style lang="scss">
 .card {
   border-radius: 4px;
   box-shadow: 0px 0px 38px -7px rgba(208, 211, 214, 0.38);
@@ -38,11 +36,19 @@ img {
   padding: 15px;
   cursor: pointer;
   transition: all 300ms;
+  width: 180px;
+  height: 300px;
   &:hover {
     transform: scale(1.2);
   }
   &__wrapper {
     position: relative;
+    margin-top: 20px;
+  }
+
+  img {
+    width: 130px;
+    height: 130px;
   }
 }
 </style>

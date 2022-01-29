@@ -29,11 +29,11 @@ const routes = [
     component: MainPage,
     children: [
       { path: "categories", component: Categories },
-      { path: "categories/:id", component: CategoriesId },
+      { path: "categories/:id", component: CategoriesId, name: "categoryId" },
       { path: "favorites", component: Favorites },
       { path: "basket", component: Basket },
       { path: "recipes", component: Recipes },
-      { path: "recipes/:id", component: RecipesById },
+      { path: "recipes/:id", component: RecipesById, name: "recipeById" },
     ],
   },
 ];

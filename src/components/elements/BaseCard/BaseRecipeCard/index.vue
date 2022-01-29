@@ -1,5 +1,7 @@
 <template>
-  <a :href="`/main/recipes/${recipeId}`" class="card">
+  <router-link
+     :to="{name:'recipeById', params:{id: recipeId}}"
+     class="card">
     <div class="card__wrapper">
       <slot name="btn"></slot>
       <slot name="image"></slot>
@@ -8,7 +10,7 @@
       <h3><slot name="recipe"></slot></h3>
       <h4><slot name="time"></slot></h4>
     </div>
-  </a>
+  </router-link>
 </template>
 
 <script>
