@@ -4,7 +4,6 @@
     class="card"
   >
     <div class="card__wrapper">
-      <slot name="btn"></slot>
       <slot name="image"></slot>
     </div>
     <div>
@@ -43,7 +42,6 @@ export default {
   }
   &__wrapper {
     position: relative;
-    margin-top: 20px;
   }
 
   img {

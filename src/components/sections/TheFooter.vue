@@ -1,5 +1,5 @@
-<template>
-  <div></div>
+<template functional>
+  <div>Panteleeva 2022</div>
 </template>
 
 <script>

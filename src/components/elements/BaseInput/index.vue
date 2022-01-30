@@ -23,7 +23,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .base-input {
   & input {
     border-radius: 3px;

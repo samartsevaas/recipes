@@ -4,7 +4,20 @@
       <base-search
         class="header__search-input"
         placeholder="Найти рецепт..."
-      ></base-search>
+        v-model.trim="choosingRecipe"
+        @input="updateSearch"
+      >
+        <ul v-show="choosingRecipe" class="dropdown__table" @click="cleanSearchRequest">
+          <li v-for="(result, index) in getResultBySearchingRecipe"
+              :key="index" class="dropdown__table-li">
+            <router-link
+                :to="{ name: 'recipeById', params:{id:`${result.id}`} }"
+            >
+              {{result.name}}
+            </router-link>
+          </li>
+        </ul>
+      </base-search>
     </div>
     <div class="header__panel">
       <div class="header__user">
@@ -25,22 +38,45 @@
 
 <script>
 import BaseSearch from "@elements/BaseSearch/index.vue";
-import { mapState } from "vuex";
+import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
 export default {
   name: "TheHeader",
   components: {
     BaseSearch,
+  },
+  data() {
+    return {
+      choosingRecipe: "",
+    }
   },
   computed: {
     ...mapState({
       register: (state) => state.register,
       auth: (state) => state.auth,
     }),
+    ...mapGetters({
+      getResultBySearchingRecipe: "getResultBySearchingRecipe",
+    }),
   },
   methods:{
     toAuth(){
       return this.$router.push("/auth");
     },
+    updateSearch(){
+      this.setSearchResultByRecipe(this.choosingRecipe.toLowerCase());
+    },
+    ...mapMutations({
+      setSearchResultByRecipe: "setSearchResultByRecipe",
+    }),
+    ...mapActions({
+      getRecipes: "getRecipes",
+    }),
+    cleanSearchRequest(){
+      this.choosingRecipe = "";
+    }
+  },
+  async mounted(){
+    await this.getRecipes();
   }
 };
 </script>
@@ -54,6 +90,7 @@ export default {
   box-shadow: 0 2.5px 9.5px #5a61691f;
   &__search {
     @extend .vertical;
+    width: 100%;
   }
   &__panel {
     display: flex;
@@ -82,7 +119,7 @@ export default {
     }
     & div {
       @extend .vertical;
-      margin: 0 80px 0 13px;
+      margin: 0 30px 0 13px;
       color: black;
       text-decoration: none;
       align-items: center;
@@ -104,5 +141,17 @@ export default {
     }
   }
 }
-
+.dropdown__table{
+  width: 50%;
+  list-style:none;
+  position: absolute;
+  z-index: 10;
+  background-color: $main-white;
+  &-li{
+    padding: 10px;
+    & :hover{
+      color: $button-change;
+    }
+  }
+}
 </style>

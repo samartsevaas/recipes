@@ -1,31 +1,66 @@
 <template>
-  <section class="card-section">
-    <base-card class="main-content__wrapper">
-      <template v-slot:btn>
-        <button class="card__like-button card__like-button-fav">
-          <font-awesome-icon :icon="['fas', 'heart']" />
-        </button>
-      </template>
-      <template v-slot:image>
-        <img src="~@/assets/images/bump.webp" />
-      </template>
-      <template v-slot:category> Запеченая тыква </template>
-      <template v-slot:value>
-        <font-awesome-icon :icon="['fas', 'clock']" /> 120 минут
-      </template>
-    </base-card>
+  <section class="card-section recipe">
+  <base-recipe-card
+      v-for="(favorite,index) in getFavoriteRecipes"
+      :key="index"
+      :recipe-id="favorite.id"
+      class="main-content__wrapper"
+  >
+    <template v-slot:btn>
+      <button class="card__like-button">
+        <font-awesome-icon :icon="['fas', 'heart']" />
+      </button>
+    </template>
+    <template v-slot:image>
+      <img :src="favorite.img" />
+    </template>
+    <template v-slot:recipe>
+      {{favorite.name}}
+    </template>
+    <template v-slot:time>
+      <font-awesome-icon :icon="['fas', 'clock']"/>
+      {{favorite.time}}мин.
+    </template>
+  </base-recipe-card>
   </section>
 </template>
 
 <script>
-import BaseCard from "@elements/BaseCard/index.vue";
-
+import BaseRecipeCard from "@elements/BaseCard/BaseRecipeCard/index.vue";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Favorites",
   components: {
-    BaseCard,
+    BaseRecipeCard,
+  },
+  data() {
+    return {
+      recipeId: null,
+      categoryId: null,
+    };
+  },
+  created() {
+    this.categoryId = +this.$route.params.id;
+  },
+  methods:{
+    ...mapActions({
+      getRecipes: "getRecipes",
+    }),
+  },
+  computed:{
+    ...mapGetters({
+      getFavoriteRecipes: "getFavoriteRecipes",
+    }),
+  },
+  async mounted() {
+    await this.getRecipes();
   },
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.card-section{
+  display: flex;
+  justify-content: space-around;
+}
+</style>

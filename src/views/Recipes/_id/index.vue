@@ -1,44 +1,63 @@
 <template>
   <recipe>
-    <div v-for="(recipe,index) in recipeById" :key="index">
-    <div class="recipe_title">
-      <h1>{{recipe.name}}</h1>
-      <div class="recipe_cook">
-        <div class="recipe_cook-title">Время приготовления</div>
-        <div class="recipe_cook-time">
-          <font-awesome-icon :icon="['fas', 'clock']"></font-awesome-icon>
-          <div>{{recipe.time}} мин.</div>
+    <div v-for="(recipe, index) in recipeById" :key="index">
+      <div class="recipe_title">
+        <div class="recipe_title-head">
+          <h1>{{ recipe.name }}</h1>
+          <button
+            class="button-like"
+            :class="{ favorite: isFav }"
+            @click="setLikedItems"
+          >
+            <font-awesome-icon :icon="['fas', 'heart']" class="icon" />
+          </button>
+        </div>
+        <div class="recipe_cook">
+          <div class="recipe_cook-title">Время приготовления</div>
+          <div class="recipe_cook-time">
+            <font-awesome-icon :icon="['fas', 'clock']"></font-awesome-icon>
+            <div>{{ recipe.time }} мин.</div>
+          </div>
+        </div>
+        <picture class="recipe_img">
+          <img :src="recipe.img" alt="recipe" />
+        </picture>
+        <div class="recipe_keys">
+          <base-link>{{ recipe.keys }}</base-link>
         </div>
       </div>
-      <picture class="recipe_img">
-        <img
-            :src="recipe.img"
-            alt="recipe"
-        />
-      </picture>
-      <div class="recipe_keys">
-        <base-link>{{ recipe.keys }}</base-link>
+      <div class="recipe_ingredients">
+        <h1>Ингредиенты</h1>
+        <ul class="recipe_ingredients-table">
+          <li
+            class="recipe_ingredients-table-li"
+            v-for="(ingred, index) in recipe.ingredients"
+            :key="index"
+          >
+            <div>{{ ingred.ingredientName }}</div>
+            <div>{{ ingred.value }}</div>
+          </li>
+        </ul>
       </div>
-    </div>
-    <div class="recipe_ingredients">
-      <h1>Ингредиенты</h1>
-      <ul class="recipe_ingredients-table">
-        <li class="recipe_ingredients-table-li" v-for="(ingred,index) in recipe.ingredients" :key="index">
-          <div>{{ingred.ingredientName}}</div>
-          <div>{{ingred.value}}</div>
-        </li>
-      </ul>
-    </div>
-    <div class="recipe_supplements">
-      <h1>Пищевая ценность</h1>
-      <base-link class="recipe_supplements-count">225ккал.</base-link>
-    </div>
-    <div class="recipe_steps">
-      <h1>Готовим</h1>
-      <ol class="recipe_steps-table" v-for="(step,index) in recipe.descriptions" :key="index">
-        <li class="recipe_steps-table-li">{{step.specification}}</li>
-      </ol>
-    </div>
+      <div class="recipe_supplements">
+        <h1>Пищевая ценность</h1>
+        <base-link href="" class="recipe_supplements-count"
+          >{{ recipe.calories }}ккал.</base-link
+        >
+      </div>
+      <div class="recipe_steps">
+        <h1>Готовим</h1>
+        <ul
+          class="recipe_steps-table"
+          v-for="(step, index) in recipe.descriptions"
+          :key="index"
+        >
+          <li class="recipe_steps-table-li">
+            <span class="table-li__marker">{{ index + 1 }}</span
+            >{{ step.specification }}
+          </li>
+        </ul>
+      </div>
     </div>
   </recipe>
 </template>
@@ -52,20 +71,36 @@ export default {
   data() {
     return {
       recipeId: null,
-    }
+      isFav: false,
+    };
   },
   components: {
     Recipe,
-    BaseLink
+    BaseLink,
   },
-  methods:{
+  methods: {
     ...mapActions({
       getRecipes: "getRecipes",
     }),
+    setLikedItems() {
+      let likedArray = JSON.parse(localStorage.getItem("likedId")) ?? [];
+      if (!likedArray.includes(this.recipeId)) {
+        likedArray.push(this.recipeId);
+      } else {
+        likedArray = likedArray.filter((id) => id !== this.recipeId);
+      }
+      this.isFav = !this.isFav;
+      localStorage.setItem("likedId", JSON.stringify(likedArray));
+    },
+    checkFavorite() {
+      return JSON.parse(localStorage.getItem("likedId")).includes(
+        this.recipeId
+      );
+    },
   },
   computed: {
     ...mapGetters({
-      getRecipeById: "getRecipeById"
+      getRecipeById: "getRecipeById",
     }),
     recipeById() {
       return this.getRecipeById(this.recipeId);
@@ -73,10 +108,12 @@ export default {
   },
   created() {
     this.recipeId = +this.$route.params.id;
+    this.isFav = this.checkFavorite();
   },
-  async mounted(){
+
+  async mounted() {
     await this.getRecipes();
-  }
+  },
 };
 </script>
 <style scoped lang="scss">
@@ -98,6 +135,24 @@ img {
   &_title {
     & h1 {
       font-size: 25px;
+    }
+    &-head {
+      display: flex;
+      & .button-like {
+        background-color: transparent;
+        border: none;
+        .icon path {
+          color: $font-color-grey_lightMax;
+          &:hover {
+            color: $notification;
+          }
+        }
+        &.favorite {
+          path {
+            color: $notification;
+          }
+        }
+      }
     }
   }
   &_img {
@@ -122,6 +177,7 @@ img {
     &-table {
       background-color: $main-white_dark;
       border-radius: 10px;
+      list-style: none;
       &-li {
         display: flex;
         justify-content: space-between;
@@ -134,8 +190,6 @@ img {
   &_steps {
     &-table {
       list-style-type: none;
-      counter-reset: num;
-      margin: 0 0 0 45px;
       padding: 15px 0 5px 0;
       font-size: 16px;
       &-li {
@@ -143,23 +197,17 @@ img {
         margin: 0 0 0 0;
         padding: 0 0 10px 0;
         line-height: 1.4;
-        &::before {
-          content: counter(num);
-          counter-increment: num;
-          display: inline-block;
-          position: absolute;
-          top: 0;
-          left: -38px;
-          width: 28px;
-          height: 28px;
-          background: $main-green;
-          color: $main-white;
-          text-align: center;
-          line-height: 28px;
-          font-size: 18px;
-        }
       }
     }
   }
+}
+.table-li__marker {
+  width: 30px;
+  height: 30px;
+  background-color: $main-green;
+  color: $main-white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
