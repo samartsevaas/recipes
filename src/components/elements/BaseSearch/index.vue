@@ -1,6 +1,11 @@
 <template>
   <label class="base-search">
-    <input class="base-search__input" :placeholder="placeholder" />
+    <input
+        class="base-search__input" :placeholder="placeholder"
+        v-bind:value="value"
+        v-on:input="$emit('input', $event.target.value)"
+    />
+<slot></slot>
   </label>
 </template>
 
@@ -9,6 +14,9 @@ export default {
   name: "BaseSearch",
   props: {
     placeholder: {
+      type: String,
+    },
+    value: {
       type: String,
     },
   },
@@ -26,6 +34,8 @@ export default {
   &__input {
     border: none;
     color: $base-font_color;
+    width: 100%;
+    position: relative;
     &:focus {
       outline: none !important;
       border: none;

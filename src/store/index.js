@@ -8,6 +8,7 @@ export default new Vuex.Store({
     register: "",
     auth: "",
     recipes: {},
+    choosingRecipe: "",
   },
   mutations: {
     register(state, register) {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     recipes(state, recipes) {
       state.recipes = recipes;
+    },
+    setSearchResultByRecipe(state, choosingRecipe) {
+      state.choosingRecipe = choosingRecipe;
     },
   },
   actions: {
@@ -75,6 +79,25 @@ export default new Vuex.Store({
           return state.recipes.data.filter((recipe) => recipe.id === id);
         }
       }
-    }
+    },
+    getResultBySearchingRecipe: (state) => {
+      if (Array.isArray(state.recipes.data) && state.choosingRecipe) {
+        return state.recipes.data.filter((recipe) =>
+          recipe.name.toLowerCase().includes(state.choosingRecipe)
+        );
+      }
+    },
+    getFavoriteRecipes(state){
+      let arrayKeys = JSON.parse(localStorage.getItem("likedId"));
+      let favoriteArray = [];
+      if (Array.isArray(state.recipes.data)) {
+        for (let i = 0; i<arrayKeys.length; i++){
+          state.recipes.data.forEach(function (item){
+            item.id === arrayKeys[i] ? favoriteArray.push(item) : []
+          })
+        }
+      }
+      return favoriteArray
+    },
   },
 });

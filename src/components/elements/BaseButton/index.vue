@@ -23,10 +23,6 @@ export default {
       type: String,
       default: "button",
     },
-    icon: {
-      type: [Array, String],
-      default: "",
-    },
   },
 
   computed: {
@@ -37,7 +33,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .base-button {
   height: 29px;
   width: 130px;

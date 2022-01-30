@@ -3,7 +3,6 @@
      :to="{name:'recipeById', params:{id: recipeId}}"
      class="card">
     <div class="card__wrapper">
-      <slot name="btn"></slot>
       <slot name="image"></slot>
     </div>
     <div class="recipe_info">
@@ -25,7 +24,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 img {
   width: 130px;
   height: 130px;
