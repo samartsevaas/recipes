@@ -22,11 +22,22 @@
         <div class="auth-data_password-label">Пароль</div>
         <base-input
           type="password"
-          :class="[onError]"
           v-model="password"
         ></base-input>
-        <div v-show="isError" class="isError">
-          Этот e-mail уже используется или не введён
+        <div v-show="isErrorInvalidEmail" :class="[onError]">
+          Введите корректный e-mail адрес
+        </div>
+        <div v-show="isEmailUseError" :class="[onError]">
+          Этот e-mail адрес уже используется
+        </div>
+        <div v-show="isErrorPassword" :class="[onError]">
+          Пароль должен состоять минимум из 8 знаков
+        </div>
+        <div v-show="isMissingEmailError" :class="[onError]">
+          Введите e-mail адрес
+        </div>
+        <div v-show="isError" :class="[onError]">
+          Неизвестная ошибка, попробуйте повторить регистрацию
         </div>
       </form>
       <div class="auth-data_buttons">
@@ -64,6 +75,10 @@ export default {
       name: "",
       email: "",
       password: "",
+      isErrorInvalidEmail: false,
+      isErrorPassword: false,
+      isEmailUseError: false,
+      isMissingEmailError: false,
       isError: false,
     };
   },
@@ -72,6 +87,11 @@ export default {
       register: "register",
     }),
     async sendRegisterData() {
+      this.isEmailUseError = false;
+      this.isErrorPassword = false;
+      this.isErrorInvalidEmail = false;
+      this.isMissingEmailError = false;
+      this.isError = false;
       try {
         await this.register({
           email: this.email,
@@ -82,11 +102,34 @@ export default {
         this.password = "";
         await this.$router.push("/main/recipes");
       } catch (e) {
-        return (this.isError = true);
+        console.log(e)
+        let missingEmailError = 'Error: FirebaseError: Firebase: Error (auth/missing-email).';
+        let passwordError =
+          "Error: FirebaseError: Firebase: Password should be at least 6 characters (auth/weak-password).";
+        let emailInvalidError =
+          "Error: FirebaseError: Firebase: Error (auth/invalid-email).";
+        let emailUseError =
+          "Error: FirebaseError: Firebase: Error (auth/email-already-in-use).";
+        switch (true){
+          case e==missingEmailError:
+            this.isErrorInvalidEmail = true;
+            break;
+          case e==emailInvalidError:
+            this.isErrorInvalidEmail = true;
+            break;
+          case e==passwordError:
+            this.isErrorPassword = true;
+            break;
+          case e==emailUseError:
+            this.isEmailUseError = true;
+            break;
+          default:
+            this.isError = true;
+            break;
+        }
       }
       this.email = "";
       this.password = "";
-      this.isError = false;
     },
     toAuth() {
       return this.$router.push("/auth");
@@ -94,10 +137,15 @@ export default {
   },
   computed: {
     onError() {
-      if (this.isError) {
-        return "onError";
+      if (
+        this.isEmailUseError ||
+        this.isErrorPassword ||
+        this.isErrorInvalidEmail ||
+        this.isError
+      ) {
+        return "isError";
       } else {
-        return "";
+        return "clean";
       }
     },
   },
@@ -168,5 +216,8 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+.clean{
+  display: none;
 }
 </style>

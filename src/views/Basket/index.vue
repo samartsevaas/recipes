@@ -1,6 +1,10 @@
 <template>
   <div>
-    <ul
+    <div v-if="!ingredients.length" class="basket-table_non">
+      <h1>Если вы захотите приготовить рецепт, добавьте ингредиенты в карточке рецепта и делайте удобные покупки в магазине.</h1>
+      <h2>Так вы точно ничего не забудете :)</h2>
+    </div>
+    <ul v-else
       class="basket-table"
       v-for="(ingredient, index) in ingredients"
       :key="index"
@@ -54,5 +58,10 @@ export default {
       border-bottom: 1px solid $box-shadow_nav;
     }
   }
+}
+.basket-table_non{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 </style>

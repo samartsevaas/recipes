@@ -32,7 +32,6 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 1px 75px 0 green;
 }
 .content {
   margin-left: 285px;

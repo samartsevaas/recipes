@@ -47,7 +47,7 @@ export default new Vuex.Store({
         );
         commit("register", data);
       } catch (error) {
-        throw new Error(error.response);
+        throw new Error(error.message);
       }
     },
     async authorization({ commit }, { email, password }) {
