@@ -5,7 +5,7 @@ import router from "./router";
 import EasySlider from "vue-easy-slider";
 import "@/assets/styles/main.scss";
 // eslint-disable-next-line
-import { test } from './firebase/test';
+import { init } from './firebase/init';
 // eslint-disable-next-line no-unused-vars
 import Services from "./services";
 Vue.prototype.$services = Services;

@@ -39,7 +39,14 @@
         </div>
       </div>
       <div class="header__user-setting">
-        <div class="uncle" @click="logOutUser"></div>
+
+          <div class=" uncle dropdown">
+            <span></span>
+            <div class="dropdown-content">
+              <p @click="logOutUser">Выйти</p>
+            </div>
+          </div>
+
       </div>
     </div>
   </header>
@@ -87,8 +94,8 @@ export default {
       } catch (e) {
         console.log(e);
       }
-      localStorage.removeItem("login");
       localStorage.removeItem("likedId");
+      localStorage.removeItem("login");
       await this.$router.push("/");
     },
   },
@@ -169,5 +176,27 @@ export default {
       color: $button-change;
     }
   }
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+  right: 0;
+  & p{
+    cursor: pointer;
+  }
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 </style>

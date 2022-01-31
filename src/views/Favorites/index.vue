@@ -1,6 +1,8 @@
 <template>
   <section class="card-section recipe">
+    <div v-if="!getFavoriteRecipes.length">Добавьте рецепты в избранные и они будут радовать вас тут :)</div>
     <base-recipe-card
+      v-else
       v-for="(favorite, index) in getFavoriteRecipes"
       :key="index"
       :recipe-id="favorite.id"
