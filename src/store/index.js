@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     register: "",
     auth: "",
+    logOut: "",
     recipes: [],
     choosingRecipe: "",
     ingredients: [],
@@ -17,6 +18,9 @@ export default new Vuex.Store({
     },
     auth(state, auth) {
       state.auth = auth;
+    },
+    logOut(state,logout){
+      state.logOut = logout;
     },
     recipes(state, recipes) {
       state.recipes = recipes;
