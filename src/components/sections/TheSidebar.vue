@@ -33,10 +33,8 @@
 </template>
 
 <script>
-
 export default {
   name: "TheSidebar",
-
 };
 </script>
 

@@ -12,20 +12,18 @@
       <div class="auth-data_action">Регистрация</div>
       <form class="auth-data_email">
         <div type="text" class="auth-data_email-label">Имя</div>
-        <base-input v-model="name"
-        ></base-input>
+        <base-input v-model="name"></base-input>
       </form>
       <form class="auth-data_email">
         <div type="text" class="auth-data_email-label">E-mail</div>
-        <base-input v-model="email"
-        ></base-input>
+        <base-input v-model="email"></base-input>
       </form>
       <form class="auth-data_password">
         <div class="auth-data_password-label">Пароль</div>
         <base-input
-            type="password"
-            :class="[onError]"
-            v-model="password"
+          type="password"
+          :class="[onError]"
+          v-model="password"
         ></base-input>
         <div v-show="isError" class="isError">
           Этот e-mail уже используется или не введён
@@ -33,16 +31,17 @@
       </form>
       <div class="auth-data_buttons">
         <div class="auth-data_buttons-request">
-          <base-button theme="confirm" type="button" @click.native="sendRegisterData">
+          <base-button
+            theme="confirm"
+            type="button"
+            @click.native="sendRegisterData"
+          >
             Зарегистрироваться
           </base-button>
         </div>
         <div class="auth-data_buttons-enter">
-          <base-button
-              theme="confirm"
-              type="button"
-              @click.native="toAuth"
-          >Уже с нами? Войти</base-button
+          <base-button theme="confirm" type="button" @click.native="toAuth"
+            >Уже с нами? Войти</base-button
           >
         </div>
       </div>
@@ -89,7 +88,7 @@ export default {
       this.password = "";
       this.isError = false;
     },
-    toAuth(){
+    toAuth() {
       return this.$router.push("/auth");
     },
   },
@@ -134,7 +133,7 @@ export default {
 }
 .auth-data {
   box-shadow: 0 1px 0 rgba(90, 97, 105, 0.11), 0 2px 4px rgba(90, 97, 105, 0.12),
-  0 5px 5px rgba(90, 97, 105, 0.06), 0 3.5px 35px rgba(90, 97, 105, 0.1);
+    0 5px 5px rgba(90, 97, 105, 0.06), 0 3.5px 35px rgba(90, 97, 105, 0.1);
   border-radius: 9px;
   padding: 11px 19.5px 17px 19px;
   &_action {

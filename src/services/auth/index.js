@@ -27,7 +27,7 @@ export class registration {
         })
         .catch((error) => {
           console.log(error);
-      })
+        });
       return (user.displayName = name);
     } catch (error) {
       throw new Error(error);

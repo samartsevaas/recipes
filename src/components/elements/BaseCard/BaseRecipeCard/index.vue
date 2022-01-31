@@ -1,7 +1,8 @@
 <template>
   <router-link
-     :to="{name:'recipeById', params:{id: recipeId}}"
-     class="card">
+    :to="{ name: 'recipeById', params: { id: recipeId } }"
+    class="card"
+  >
     <div class="card__wrapper">
       <slot name="image"></slot>
     </div>

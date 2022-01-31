@@ -45,6 +45,9 @@
           >{{ recipe.calories }}ккал.</base-link
         >
       </div>
+      <base-link theme="green" class="to-basket" @click="addToBasket"
+        >Добавить в корзину</base-link
+      >
       <div class="recipe_steps">
         <h1>Готовим</h1>
         <ul
@@ -65,7 +68,7 @@
 <script>
 import Recipe from "@pages/Recipe/index.vue";
 import BaseLink from "@elements/BaseLink/index.vue";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   name: "RecipeViews",
   data() {
@@ -82,6 +85,9 @@ export default {
     ...mapActions({
       getRecipes: "getRecipes",
     }),
+    ...mapMutations({
+      addedToBasked: "addedToBasked",
+    }),
     setLikedItems() {
       let likedArray = JSON.parse(localStorage.getItem("likedId")) ?? [];
       if (!likedArray.includes(this.recipeId)) {
@@ -96,6 +102,10 @@ export default {
       return JSON.parse(localStorage.getItem("likedId")).includes(
         this.recipeId
       );
+    },
+    addToBasket() {
+      const [{ ingredients }] = this.recipeById;
+      this.addedToBasked(ingredients);
     },
   },
   computed: {
@@ -209,5 +219,12 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.to-basket {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 20px;
 }
 </style>

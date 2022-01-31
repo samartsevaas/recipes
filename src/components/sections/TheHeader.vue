@@ -7,13 +7,20 @@
         v-model.trim="choosingRecipe"
         @input="updateSearch"
       >
-        <ul v-show="choosingRecipe" class="dropdown__table" @click="cleanSearchRequest">
-          <li v-for="(result, index) in getResultBySearchingRecipe"
-              :key="index" class="dropdown__table-li">
+        <ul
+          v-show="choosingRecipe"
+          class="dropdown__table"
+          @click="cleanSearchRequest"
+        >
+          <li
+            v-for="(result, index) in getResultBySearchingRecipe"
+            :key="index"
+            class="dropdown__table-li"
+          >
             <router-link
-                :to="{ name: 'recipeById', params:{id:`${result.id}`} }"
+              :to="{ name: 'recipeById', params: { id: `${result.id}` } }"
             >
-              {{result.name}}
+              {{ result.name }}
             </router-link>
           </li>
         </ul>
@@ -27,10 +34,12 @@
         />
         <div class="header__user-status" v-if="register">{{ register }}</div>
         <div class="header__user-status" v-else-if="auth">{{ auth }}</div>
-        <div class="header__user-status" v-else>Неавторизированный пользователь</div>
+        <div class="header__user-status" v-else>
+          Неавторизированный пользователь
+        </div>
       </div>
       <div class="header__user-setting">
-        <div class="uncle"></div>
+        <div class="uncle" @click="logOut"></div>
       </div>
     </div>
   </header>
@@ -47,7 +56,7 @@ export default {
   data() {
     return {
       choosingRecipe: "",
-    }
+    };
   },
   computed: {
     ...mapState({
@@ -58,11 +67,8 @@ export default {
       getResultBySearchingRecipe: "getResultBySearchingRecipe",
     }),
   },
-  methods:{
-    toAuth(){
-      return this.$router.push("/auth");
-    },
-    updateSearch(){
+  methods: {
+    updateSearch() {
       this.setSearchResultByRecipe(this.choosingRecipe.toLowerCase());
     },
     ...mapMutations({
@@ -71,13 +77,17 @@ export default {
     ...mapActions({
       getRecipes: "getRecipes",
     }),
-    cleanSearchRequest(){
+    cleanSearchRequest() {
       this.choosingRecipe = "";
-    }
+    },
+    logOut(){
+      localStorage.removeItem("login");
+      this.$router.push("/");
+    },
   },
-  async mounted(){
+  async mounted() {
     await this.getRecipes();
-  }
+  },
 };
 </script>
 
@@ -103,7 +113,6 @@ export default {
     @media screen and (max-width: 768px) {
       display: block;
       margin-left: 20px;
-
     }
     & img {
       display: flex;
@@ -141,15 +150,15 @@ export default {
     }
   }
 }
-.dropdown__table{
+.dropdown__table {
   width: 50%;
-  list-style:none;
+  list-style: none;
   position: absolute;
   z-index: 10;
   background-color: $main-white;
-  &-li{
+  &-li {
     padding: 10px;
-    & :hover{
+    & :hover {
       color: $button-change;
     }
   }

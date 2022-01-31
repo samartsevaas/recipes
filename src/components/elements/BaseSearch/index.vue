@@ -1,11 +1,12 @@
 <template>
   <label class="base-search">
     <input
-        class="base-search__input" :placeholder="placeholder"
-        v-bind:value="value"
-        v-on:input="$emit('input', $event.target.value)"
+      class="base-search__input"
+      :placeholder="placeholder"
+      v-bind:value="value"
+      v-on:input="$emit('input', $event.target.value)"
     />
-<slot></slot>
+    <slot></slot>
   </label>
 </template>
 

@@ -31,7 +31,7 @@ const routes = [
       { path: "categories", component: Categories, name: "categories" },
       { path: "categories/:id", component: CategoriesId, name: "categoryId" },
       { path: "favorites", component: Favorites },
-      { path: "basket", component: Basket, name: "basket"},
+      { path: "basket", component: Basket, name: "basket" },
       { path: "recipes", component: Recipes },
       { path: "recipes/:id", component: RecipesById, name: "recipeById" },
     ],

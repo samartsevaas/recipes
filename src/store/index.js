@@ -7,8 +7,9 @@ export default new Vuex.Store({
   state: {
     register: "",
     auth: "",
-    recipes: {},
+    recipes: [],
     choosingRecipe: "",
+    ingredients: [],
   },
   mutations: {
     register(state, register) {
@@ -22,6 +23,14 @@ export default new Vuex.Store({
     },
     setSearchResultByRecipe(state, choosingRecipe) {
       state.choosingRecipe = choosingRecipe;
+    },
+    addedToBasked(state, ingredients) {
+      state.ingredients.push(...ingredients);
+    },
+    removeFromBasket(state, id) {
+      state.ingredients = state.ingredients.filter((item) => {
+        return item.ingredientId !== id;
+      });
     },
   },
   actions: {
@@ -69,7 +78,9 @@ export default new Vuex.Store({
     getRecipesByCategoryId: (state) => (id) => {
       {
         if (Array.isArray(state.recipes.data)) {
-          return state.recipes.data.filter((recipe) => recipe.categoryId === id);
+          return state.recipes.data.filter(
+            (recipe) => recipe.categoryId === id
+          );
         }
       }
     },
@@ -87,17 +98,17 @@ export default new Vuex.Store({
         );
       }
     },
-    getFavoriteRecipes(state){
+    getFavoriteRecipes(state) {
       let arrayKeys = JSON.parse(localStorage.getItem("likedId"));
       let favoriteArray = [];
       if (Array.isArray(state.recipes.data)) {
-        for (let i = 0; i<arrayKeys.length; i++){
-          state.recipes.data.forEach(function (item){
-            item.id === arrayKeys[i] ? favoriteArray.push(item) : []
-          })
+        for (let i = 0; i < arrayKeys.length; i++) {
+          state.recipes.data.forEach(function (item) {
+            item.id === arrayKeys[i] ? favoriteArray.push(item) : [];
+          });
         }
       }
-      return favoriteArray
+      return favoriteArray;
     },
   },
 });

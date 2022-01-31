@@ -1,27 +1,27 @@
 <template>
   <section class="card-section recipe">
-  <base-recipe-card
-      v-for="(favorite,index) in getFavoriteRecipes"
+    <base-recipe-card
+      v-for="(favorite, index) in getFavoriteRecipes"
       :key="index"
       :recipe-id="favorite.id"
       class="main-content__wrapper"
-  >
-    <template v-slot:btn>
-      <button class="card__like-button">
-        <font-awesome-icon :icon="['fas', 'heart']" />
-      </button>
-    </template>
-    <template v-slot:image>
-      <img :src="favorite.img" />
-    </template>
-    <template v-slot:recipe>
-      {{favorite.name}}
-    </template>
-    <template v-slot:time>
-      <font-awesome-icon :icon="['fas', 'clock']"/>
-      {{favorite.time}}мин.
-    </template>
-  </base-recipe-card>
+    >
+      <template v-slot:btn>
+        <button class="card__like-button">
+          <font-awesome-icon :icon="['fas', 'heart']" />
+        </button>
+      </template>
+      <template v-slot:image>
+        <img :src="favorite.img" />
+      </template>
+      <template v-slot:recipe>
+        {{ favorite.name }}
+      </template>
+      <template v-slot:time>
+        <font-awesome-icon :icon="['fas', 'clock']" />
+        {{ favorite.time }}мин.
+      </template>
+    </base-recipe-card>
   </section>
 </template>
 
@@ -42,12 +42,12 @@ export default {
   created() {
     this.categoryId = +this.$route.params.id;
   },
-  methods:{
+  methods: {
     ...mapActions({
       getRecipes: "getRecipes",
     }),
   },
-  computed:{
+  computed: {
     ...mapGetters({
       getFavoriteRecipes: "getFavoriteRecipes",
     }),
@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.card-section{
+.card-section {
   display: flex;
   justify-content: space-around;
 }
