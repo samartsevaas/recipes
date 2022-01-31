@@ -1,5 +1,5 @@
 <template functional>
-  <div>Panteleeva 2022</div>
+  <div class="footer">Panteleeva 2022</div>
 </template>
 
 <script>
@@ -8,4 +8,9 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.footer {
+  display: flex;
+  justify-content: center;
+}
+</style>

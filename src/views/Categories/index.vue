@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import {mapActions, mapState} from "vuex";
+import { mapActions, mapState } from "vuex";
 import BaseCard from "@elements/BaseCard/index.vue";
 export default {
   name: "Categories",
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.card-section{
+.card-section {
   display: flex;
   justify-content: space-between;
 }

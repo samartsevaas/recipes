@@ -35,7 +35,7 @@ library.add(
   faLemon,
   faBell,
   faHeart,
-  faClock,
+  faClock
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);

@@ -5,5 +5,3 @@ import { firebaseConfig } from "./config.js";
 export const test = (function () {
   initializeApp(firebaseConfig);
 })();
-
-

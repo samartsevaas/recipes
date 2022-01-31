@@ -1,10 +1,10 @@
 <template>
   <section class="card-section recipe">
     <base-recipe-card
-      v-for="(recipe,index) in recipesByCategory"
+      v-for="(recipe, index) in recipesByCategory"
       :key="index"
-        :recipe-id="recipe.id"
-        class="main-content__wrapper"
+      :recipe-id="recipe.id"
+      class="main-content__wrapper"
     >
       <template v-slot:btn>
         <button class="card__like-button">
@@ -15,12 +15,12 @@
         <img :src="recipe.img" />
       </template>
       <template v-slot:recipe>
-      {{recipe.name}}
+        {{ recipe.name }}
       </template>
       <template v-slot:time>
-        <font-awesome-icon :icon="['fas', 'clock']"/>
-        {{recipe.time}}мин.
-        </template>
+        <font-awesome-icon :icon="['fas', 'clock']" />
+        {{ recipe.time }}мин.
+      </template>
     </base-recipe-card>
   </section>
 </template>
@@ -60,7 +60,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.card-section{
+.card-section {
   display: flex;
   justify-content: space-around;
 }

@@ -1,9 +1,9 @@
 <template>
   <button
-      :type="type"
-      class="base-button"
-      :class="[getTheme]"
-      @click="$emit('click')"
+    :type="type"
+    class="base-button"
+    :class="[getTheme]"
+    @click="$emit('click')"
   >
     <slot></slot>
   </button>
@@ -15,8 +15,7 @@ export default {
   props: {
     theme: {
       type: String,
-      validator: (theme) =>
-          ["confirm", "delete", "cancel"].includes(theme),
+      validator: (theme) => ["confirm", "delete", "cancel"].includes(theme),
       default: "confirm",
     },
     type: {

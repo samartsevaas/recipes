@@ -4,6 +4,7 @@
     v-bind="defineTag.attributes"
     class="base-link"
     :class="[addClass]"
+    @click="$emit('click')"
   >
     <slot></slot>
   </component>
@@ -51,6 +52,7 @@ export default {
   border-radius: 9px;
   font-size: 12px;
   padding: 3px 7px;
+  border: none;
 }
 .base-link_green {
   background-color: $main-green;

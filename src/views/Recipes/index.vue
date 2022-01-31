@@ -7,28 +7,36 @@
         <picture class="item-image">
           <img src="~@/assets/images/slide1.png" />
         </picture>
-        <base-link :href="{ name: 'categories' }" theme="green">Начать готовить</base-link>
+        <base-link :href="{ name: 'categories' }" theme="green"
+          >Начать готовить</base-link
+        >
       </SliderItem>
       <SliderItem>
         <div class="item-slogan">Оптимизируйте затраты на продукты</div>
         <picture class="item-image">
           <img src="~@/assets/images/slide2.png" />
         </picture>
-        <base-link :href="{ name: 'categories' }" theme="green">Начать готовить</base-link>
+        <base-link :href="{ name: 'categories' }" theme="green"
+          >Начать готовить</base-link
+        >
       </SliderItem>
       <SliderItem>
         <div class="item-slogan">Сократите количество выбрасываемой еды</div>
         <picture class="item-image">
           <img src="~@/assets/images/slide3.png" />
         </picture>
-        <base-link :href="{ name: 'basket' }" theme="yellow">Купить продукты</base-link>
+        <base-link :href="{ name: 'basket' }" theme="yellow"
+          >Купить продукты</base-link
+        >
       </SliderItem>
       <SliderItem>
         <div class="item-slogan">Больше не нужно сидеть на диете</div>
         <picture class="item-image">
           <img src="~@/assets/images/slide4.png" />
         </picture>
-        <base-link :href="{ name: 'categories' }" theme="yellow">Начать готовить</base-link>
+        <base-link :href="{ name: 'categories' }" theme="yellow"
+          >Начать готовить</base-link
+        >
       </SliderItem>
       <SliderItem>
         <div class="item-slogan">
@@ -37,7 +45,9 @@
         <picture class="item-image">
           <img src="~@/assets/images/slide5.png" />
         </picture>
-        <base-link :href="{ name: 'categories' }" theme="green">Начать готовить</base-link>
+        <base-link :href="{ name: 'categories' }" theme="green"
+          >Начать готовить</base-link
+        >
       </SliderItem>
     </Slider>
   </div>
@@ -49,7 +59,7 @@ export default {
   name: "Recipes",
   components: {
     BaseLink,
-  }
+  },
 };
 </script>
 

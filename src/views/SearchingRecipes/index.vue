@@ -1,13 +1,11 @@
 <template>
-<div></div>
+  <div></div>
 </template>
 
 <script>
 export default {
-  name: "index"
-}
+  name: "index",
+};
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

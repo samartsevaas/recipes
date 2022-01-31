@@ -1,10 +1,10 @@
 <template>
   <label class="base-input">
     <input
-        :type="type"
-        :value="value"
-        @input="$emit('input', $event.target.value)"
-        autocomplete="on"
+      :type="type"
+      :value="value"
+      @input="$emit('input', $event.target.value)"
+      autocomplete="on"
     />
   </label>
 </template>
