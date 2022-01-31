@@ -46,6 +46,7 @@ export class registration {
       throw new Error(error);
     }
   }
+
   async logOut() {
     try {
       // eslint-disable-next-line no-unused-vars

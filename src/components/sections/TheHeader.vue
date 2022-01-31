@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="header__user-setting">
-        <div class="uncle" @click="logOut"></div>
+        <div class="uncle" @click="logOutUser"></div>
       </div>
     </div>
   </header>
@@ -76,13 +76,19 @@ export default {
     }),
     ...mapActions({
       getRecipes: "getRecipes",
+      logOut: "logOut"
     }),
     cleanSearchRequest() {
       this.choosingRecipe = "";
     },
-    logOut(){
+    async logOutUser(){
+      try{
+        await this.logOut();
+      } catch (e) {
+        console.log(e);
+      }
       localStorage.removeItem("login");
-      this.$router.push("/");
+      await this.$router.push("/");
     },
   },
   async mounted() {
