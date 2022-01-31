@@ -76,7 +76,7 @@ export default {
     }),
     ...mapActions({
       getRecipes: "getRecipes",
-      logOut: "logOut"
+      logOut: "logOut",
     }),
     cleanSearchRequest() {
       this.choosingRecipe = "";
@@ -88,6 +88,7 @@ export default {
         console.log(e);
       }
       localStorage.removeItem("login");
+      localStorage.removeItem("likedId");
       await this.$router.push("/");
     },
   },
