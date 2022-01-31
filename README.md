@@ -1,6 +1,11 @@
 # recipes
 
-### Compiles and hot-reloads for development
+### ES Lint fix
+```
+npm run lint
+```
+
+### Compiles
 ```
 npm run serve
 ```
@@ -8,3 +13,5 @@ npm run serve
 ### GH Pages
 ```
 npm run deploy
+```
+
